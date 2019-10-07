@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Enjoy it!</title>
+</head>
+
+<body>
+    请输入虎牙房间号：<input id="huya_roomid" type="text"> <button onclick="startTask()">开始下载保存视频</button>
+
+</body>
+<script>
+    function startTask() {
+        let huyaUrl = document.getElementById("huya_roomid").value;
+        console.log(huyaUrl);
+
+        //和主进程通信
+        // In renderer process (web page).
+        const { ipcRenderer } = require('electron')
+        // console.log(ipcRenderer.sendSync('synchronous-message', 'ping')) // prints "pong"
+
+        // ipcRenderer.on('asynchronous-reply', (event, arg) => {
+        //     console.log(arg) // prints "pong"
+        // })
+        ipcRenderer.send('asynchronous-message', 'ping')
+    }
+
+
+
+
+</script>
+
+</html>
