@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/ZhangMingZhao1/Artanis_Video_Electron/issues"
   },
-  "homepage": "https://github.com/ZhangMingZhao1/Artanis_Video_Electron#readme"
+  "homepage": "https://github.com/ZhangMingZhao1/Artanis_Video_Electron#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "fs-extra": "^8.1.0"
+  }
 }

@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-require("./message")
+require("./engine/message")
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
