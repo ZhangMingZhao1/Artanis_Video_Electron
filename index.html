@@ -14,7 +14,7 @@
     function startTask() {
         let huyaUrl = document.getElementById("huya_roomid").value;
         const { ipcRenderer } = require('electron')
-
+        console.log(1111);
         ipcRenderer.send('asynchronous-message', huyaUrl)
     }
 

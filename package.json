@@ -2,10 +2,11 @@
   "name": "artanis_video_electron",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "start": "npm run build && electron ./dist/main.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,9 @@
   "dependencies": {
     "axios": "^0.19.0",
     "fs-extra": "^8.1.0"
+  },
+  "devDependencies": {
+    "electron": "^6.0.12",
+    "ts-node": "^8.4.1"
   }
 }
