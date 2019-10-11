@@ -1,7 +1,7 @@
-const axios = require("axios");
-const fs = require("fs-extra");
+import axios from "axios";
+import fs from "fs-extra";
 
-function getHuyaHtml(roomId) {
+function getHuyaHtml(roomId:string) {
     return new Promise( (resolve,reject)=>{
         axios.get(`https://www.huya.com/${roomId}`).then(data => {
             if (data.data) {
@@ -13,7 +13,7 @@ function getHuyaHtml(roomId) {
                     const infoObj = JSON.parse("{" + regRes[0])["stream"];
                     //  console.log(infoObj);
                     if (infoObj["status"] == 200) {
-                        logger.info("当前连接在线");
+                        console.log("当前连接在线");
                         const room_info = infoObj["data"][0]["gameLiveInfo"];
                         const streamerName = room_info["nick"];
                         const len = infoObj["data"][0]["gameStreamInfoList"].length;
@@ -29,7 +29,7 @@ function getHuyaHtml(roomId) {
                             if (i == 0) {
                                 cur = resStream;
                             }
-                            // console.log(resStream);
+                            console.log(resStream);
                         }
                         resolve(cur);
                         // console.log(cur);
@@ -37,9 +37,11 @@ function getHuyaHtml(roomId) {
                         reject("不在线")
                     }
                 }
+            }else {
+                reject("data.data没数据")
             }
         });
     })
 }
 
-module.exports = getHuyaHtml
+export default getHuyaHtml;
