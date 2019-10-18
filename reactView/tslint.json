@@ -1,0 +1,32 @@
+{
+    "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+    "jsRules": {
+      "no-console": false 
+    },
+    "rules":{
+      "interface-name" : [false],
+      "no-console":false,
+      "no-debugger":false,
+      "indent":[true, "spaces", 2], 
+      "no-consecutive-blank-lines": [
+        true,
+        2
+      ],
+      "jsx-no-lambda": false,
+     
+      "object-literal-sort-keys": false,
+    
+      "ordered-imports": false,
+      "no-string-literal": false,
+      "semicolon":[true, "always", "ignore-interfaces"],
+      "quotemark":[true, "single","avoid-escape","jsx-double"]
+    },
+    "linterOptions": {
+      "exclude": [
+        "config/**/*.js",
+        "src/tool/*.js",
+				"node_modules/**/*.ts",
+				"src/serviceWorker.ts"
+      ]
+    }
+  }
