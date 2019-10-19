@@ -22,3 +22,9 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
   }
 }
+
+declare global{
+  interface Window {
+    electron: any
+  }
+}

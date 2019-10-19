@@ -11,12 +11,17 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      // preload: path.join(__dirname, '../reactView/public/renderer.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
+   
     }
   })
 
   // 加载index.html文件
-  win.loadFile(path.join(__dirname, "../index.html"));
+  // win.loadFile(path.join(__dirname, "../index.html"));
+
+  // 加载应用--- 适用于 react 项目
+  win.loadURL('http://localhost:3000/');
 
   // 打开开发者工具
   win.webContents.openDevTools()

@@ -1,21 +1,32 @@
-import React from "react";
-import { ipcRenderer } from "electron";
+import React , {useState} from "react";
+// import { ipcRenderer } from "electron";
+const ipcRenderer = window.electron.ipcRenderer;
+
 import { Button, Input } from "rsuite";
 import "./index.less";
 interface Props {
-  onClick: any;
-  platformName: string;
+  data:{
+    // onClick: any;
+    platformName: string;
+    platformKey: string
+  }
 }
 
 function Item(props: Props) {
+  const [huyaUrl,setHuyaUrl] = useState("")
   function handleClick() {
-    ipcRenderer.send(`asynchronous-message`, huyaUrl);
+    ipcRenderer.send(`async${props.data.platformKey}-message`, huyaUrl);
+    console.log('cc')
+  }
+  function handleChange(value: string) {
+    console.log(value);
+    setHuyaUrl(value);
   }
   return (
     <div className="item">
-      <div>请输入虎牙房间号：</div>{" "}
-      <Input onChange={() => {}} style={{ width: 300 }} size="md" />
-      <Button onClick={}>开始下载保存视频</Button>
+      <div style={{marginLeft:30,marginRight:30}}>请输入{props.data.platformName}房间号：</div>
+      <Input onChange={handleChange} style={{ width: 300,marginRight:30 }} size="md" />
+      <Button appearance="primary" onClick={handleClick}>开始下载保存视频</Button>
     </div>
   );
 }
