@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from "electron";
-import getHuyaSteam from "./engine/message";
+import getHuyaSteam from "./engine/huya/message";
 import * as path from "path";
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
@@ -12,8 +12,8 @@ function createWindow () {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-      // preload: path.join(__dirname, '../reactView/public/renderer.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
-   
+      javascript: true,
+      preload: path.join(__dirname, '../reactView/public/renderer.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
     }
   })
 

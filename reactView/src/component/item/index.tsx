@@ -22,11 +22,16 @@ function Item(props: Props) {
     console.log(value);
     setHuyaUrl(value);
   }
+  function stopDown() {
+    ipcRenderer.send(`async${props.data.platformKey}-message`, 'stop');
+    // console.log('cc')
+  }
   return (
     <div className="item">
-      <div style={{marginLeft:30,marginRight:30}}>请输入{props.data.platformName}房间号：</div>
+      <div style={{marginLeft:30,marginRight:30, fontSize:18, fontWeight:400, color:"#1cbbb4"}}>请输入{props.data.platformName}房间号：</div>
       <Input onChange={handleChange} style={{ width: 300,marginRight:30 }} size="md" />
-      <Button appearance="primary" onClick={handleClick}>开始下载保存视频</Button>
+      <Button style={{marginRight:20}} appearance="primary" onClick={handleClick}>开始下载保存视频</Button>
+      <Button style={{color:"red"}} appearance="default" onClick={stopDown}>停止下载</Button>
     </div>
   );
 }
