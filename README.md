@@ -13,7 +13,9 @@
 # 开发
 ```
 git clone https://github.com/ZhangMingZhao1/Artanis_Video_Electron.git
+npm install
 cd reactView 
+npm install
 npm start (开启react渲染进程)
 cd ..
 npm start (开启node主进程)
