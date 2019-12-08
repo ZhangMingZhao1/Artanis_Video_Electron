@@ -1,9 +1,9 @@
-const {ipcMain} = require('electron');
-import getHuya from './getHuyaStreamUrl';
-const { spawn } = require('child_process');
 const log4js = require('log4js');
+const dayjs = require('dayjs');
 const rootPath = process.cwd();
-
+const {ipcMain,ipcRenderer} = require('electron');
+const { spawn } = require('child_process');
+import getHuya from './getHuyaStreamUrl';
 log4js.configure({
   appenders: {
     cheese:{
@@ -27,8 +27,14 @@ export default ()=> {
     if(huyaRoomId !== 'stop') {
       getHuya(huyaRoomId).then((streamUrl=>{
         // const cmd = `ffmpeg -i "${streamUrl}" -f mp4 res.MP4`;
+        // 命名加上时间戳
+        const timeV = dayjs().format('YYYY-MM-DD');
         const cmd = `ffmpeg`;
-        const huyaApp = spawn(cmd,['-i',streamUrl,'-f','mp4',huyaRoomId+'res.MP4']);
+        const huyaApp = spawn(cmd,['-i',streamUrl,'-f','mp4',huyaRoomId+`${timeV}res.MP4`]);
+        // console.log('11111',huyaApp,JSON.stringify(huyaApp));
+        // 发送
+        ipcRenderer.send('processInfo', huyaApp.pid)
+        
         pool.push(huyaApp);
         huyaApp.stdout.on('data', (data:any) => {
           // console.log(`stdout: ${data}`);

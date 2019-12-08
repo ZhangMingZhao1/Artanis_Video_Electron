@@ -8,3 +8,4 @@ dist/
 .idea
 .idea/
 *.idea/
+logs/

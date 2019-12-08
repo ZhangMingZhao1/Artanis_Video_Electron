@@ -1,8 +1,8 @@
-import React , {useState} from "react";
+import React , {useState,useEffect} from "react";
 // import { ipcRenderer } from "electron";
 const ipcRenderer = window.electron.ipcRenderer;
-
 import { Button, Input } from "rsuite";
+import {Table} from 'antd';
 import "./index.less";
 interface Props {
   data:{
@@ -13,7 +13,15 @@ interface Props {
 }
 
 function Item(props: Props) {
-  const [huyaUrl,setHuyaUrl] = useState("")
+  const [huyaUrl,setHuyaUrl] = useState("");
+  const [pidArr,setPidArr] = useState<Array<string>>([]);
+  useEffect(()=>{
+    ipcRenderer.on('processInfo',(pid:any)=>{
+      const nextPidArr = [...pidArr,pid];
+      setPidArr(nextPidArr);
+    })
+  },[])
+  // ipcRenderer.on()
   function handleClick() {
     ipcRenderer.send(`async${props.data.platformKey}-message`, huyaUrl);
     console.log('cc')
@@ -27,12 +35,20 @@ function Item(props: Props) {
     // console.log('cc')
   }
   return (
+    <>
     <div className="item">
       <div style={{marginLeft:30,marginRight:30, fontSize:18, fontWeight:400, color:"#1cbbb4"}}>请输入{props.data.platformName}房间号：</div>
       <Input onChange={handleChange} style={{ width: 300,marginRight:30 }} size="md" />
       <Button style={{marginRight:20}} appearance="primary" onClick={handleClick}>开始下载保存视频</Button>
       <Button style={{color:"red"}} appearance="default" onClick={stopDown}>停止下载</Button>
     </div>
+    <div className="list">
+    <Table
+      columns={}
+      // dataSource={}
+      />
+    </div>
+    </>
   );
 }
 
